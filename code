@@ -1,10 +1,10 @@
 #include <iostream>
 #include <string>
-
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 int main() {
-    // наши данные
     string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     string lower = "abcdefghijklmnopqrstuvwxyz";
     string num = "1234567890";
@@ -12,63 +12,51 @@ int main() {
     string user;
     string password;
     
-    char Lower, Upper, Numbers, Symbols ;
+    int minL, maxL;
+    cout << "Minimum length of the password: ";
+    cin >> minL;
+    cout << "Maximum length of the password: ";
+    cin >> maxL;
     
-    // запрос юзеру и ++
+    char ans1, ans2, ans3, ans4 ;
     cout << "Do you want to include uppercase? y/n? : ";
-    cin >> Upper;
-    if (Upper == 'y') {
+    cin >> ans1;
+    if (ans1 == 'y') {
         user += upper;
     }
     
     cout << "Do you want to include lowercase? y/n? : ";
-    cin >> Lower;
-    if (Lower == 'y') {
+    cin >> ans2;
+    if (ans2 == 'y') {
         user += lower;
     }
 
     cout << "Do you want to include numbers? y/n? : ";
-    cin >> Numbers;
-    if (Numbers == 'y') {
+    cin >> ans3;
+    if (ans3 == 'y') {
         user += num;
     }
     
     cout << "Do you want to include symbols? y/n? : ";
-    cin >> Symbols;
-    if (Symbols == 'y') {
+    cin >> ans4;
+    if (ans4 == 'y') {
         user += symbol;
     }
-
-    // размер пароля
-    int minL, maxL;
-    cout << "Enter minimum length of the password: ";
-    cin >> minL;
-    cout << "Enter maximum length of the password: ";
-    cin >> maxL;
     
-    //генератор чисел  
     srand(time(0));
-    // пароль
     int length = rand() % (maxL - minL + 1) + minL;
-    for(int i = 1; i <= length; i++) {
+    for(int i = 0; i < length; i++) {
         password += user[rand() % user.size()];
-    }
-
-    cout << password << endl;
-
-
-//  определяет сложность/легкость
-    bool hasLower = Lower == 'y';
-    bool hasUpper = Upper == 'y';
-    bool hasNumbers = Numbers == 'y';
-    bool hasSymbols = Symbols == 'y';
-
-    if (password.size() >= 8 && hasNumbers && hasSymbols) {
-        cout << "Password : strong" << endl;
+    }  cout<<password<<endl;
+    
+    
+    if (password.size() >= 6 && ans3 == 'y' && ans4 == 'y') {
+        cout << "Password: Strong" << endl;
     } else {
-        cout << "Password : Easy" << endl;
+        cout << "Password: Easy" << endl;
     }
     
     return 0;
 }
+
 
