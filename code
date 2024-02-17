@@ -5,58 +5,65 @@
 using namespace std;
 
 int main() {
+    srand((unsigned) time(NULL));
     string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     string lower = "abcdefghijklmnopqrstuvwxyz";
     string num = "1234567890";
     string symbol = "+_*&^%$#@!";
-    string user;
-    string password;
-    
+    string password = "";
+    int n = 0;
+
     int minL, maxL;
-    cout << "Minimum length of the password: ";
+    cout << "Enter minimum length of the password: ";
     cin >> minL;
-    cout << "Maximum length of the password: ";
+    cout << "Enter maximum length of the password: ";
     cin >> maxL;
     
     char ans1, ans2, ans3, ans4 ;
     cout << "Do you want to include uppercase? y/n? : ";
     cin >> ans1;
     if (ans1 == 'y') {
-        user += upper;
+        n++;
+        password += upper[rand() % upper.size()];
     }
-    
+
     cout << "Do you want to include lowercase? y/n? : ";
     cin >> ans2;
     if (ans2 == 'y') {
-        user += lower;
+        n++;
+        password += lower[rand() % lower.size()];
     }
 
     cout << "Do you want to include numbers? y/n? : ";
     cin >> ans3;
     if (ans3 == 'y') {
-        user += num;
+        n++;
+        password += num[rand() % num.size()];
     }
-    
+
     cout << "Do you want to include symbols? y/n? : ";
     cin >> ans4;
     if (ans4 == 'y') {
-        user += symbol;
+        n++;
+        password += symbol[rand() % symbol.size()];
+    }
+
+    int length = rand() % (maxL - minL + 1) + minL;
+    for(int i = 0; i < length - n; i++){
+        password += lower[rand() % lower.size()];
     }
     
-    srand(time(0));
-    int length = rand() % (maxL - minL + 1) + minL;
-    for(int i = 0; i < length; i++) {
-        password += user[rand() % user.size()];
-    }  cout<<password<<endl;
-    
-    
-    if (password.size() >= 6 && ans3 == 'y' && ans4 == 'y') {
+    if (password.size() >= 6 && ans3 == 'y' && ans4 == 'y' ) {
         cout << "Password: Strong" << endl;
     } else {
         cout << "Password: Easy" << endl;
     }
+
+    cout << password << endl;
     
     return 0;
 }
+
+
 
 
